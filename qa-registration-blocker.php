@@ -86,6 +86,10 @@
             if ( in_array( $email_domain, $banned_ids ) )
                 return $this->translate( 'email_domain_not_allowed' );
 
+            if (strpos($email, '@data.gouv.fr') === false && strpos($email, '@beta.gouv.fr') === false ) { 
+                return 'Invalid email';
+            }
+
             if ( qa_opt( qas_ubl_opt::DONT_ALLOW_TO_CHANGE_EMAIL ) && isset( $olduser ) && qa_get_logged_in_level() < QA_USER_LEVEL_EXPERT ) {
                 return $this->translate( 'not_allowed_to_change_email' );
             }
